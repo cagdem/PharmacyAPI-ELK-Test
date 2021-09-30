@@ -23,17 +23,17 @@ namespace Pharmacy.Infrastructure.Repositories.DapperRepositories
             db = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
         }
 
-        public override async Task Add(Company entity)
+        public override Task Add(Company entity)
         {
             string sql = "INSERT INTO Companies (CompanyName) VALUES(@CompanyName)";
-            await db.ExecuteAsync(sql, entity);
+            return db.ExecuteAsync(sql, entity);
         }
 
 
-        public override async Task Delete(Company entity)
+        public override  Task Delete(Company entity)
         {
             string sql = "DELETE FROM Companies WHERE CompanyId = @id";
-            await db.ExecuteAsync(sql, new { id = entity.CompanyId });
+            return db.ExecuteAsync(sql, new { id = entity.CompanyId });
             
         }
 
@@ -52,10 +52,10 @@ namespace Pharmacy.Infrastructure.Repositories.DapperRepositories
             return result;
         }
 
-        public override async Task Update(Company entity)
+        public override Task Update(Company entity)
         {
             string sql = "UPDATE Companies Set CompanyName = @CompanyName WHERE CompanyId=@CompanyId";
-            await db.ExecuteAsync(sql, entity);
+            return db.ExecuteAsync(sql, entity);
 
 
         }

@@ -25,10 +25,10 @@ namespace Pharmacy.Application.CompanyApp
             return _companyRepository.Add(companyDto.Adapt<Company>());
         }
 
-        public async Task Delete(int id)
+        public Task Delete(int id)
         {
-            var result = _companyRepository.GetByCompanyId(id).Result;
-            await _companyRepository.Delete(result);
+            var result = _companyRepository.GetByCompanyId(id);
+            return _companyRepository.Delete(result.Result);
 
         }
 

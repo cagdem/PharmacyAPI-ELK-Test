@@ -30,19 +30,19 @@ namespace Pharmacy.Application.MedicineApp
             _companyRepository = companyRepository;
         }
 
-        public async Task Add(MedicineDto medicineDto)
+        public Task Add(MedicineDto medicineDto)
         {
-            var result = await _companyRepository.Get(c => c.CompanyName == medicineDto.CompanyName);
-            Company company = result.ElementAt(0);
+            var result = _companyRepository.Get(c => c.CompanyName == medicineDto.CompanyName);
+            Company company = result.Result.ElementAt(0);
             Medicine data = (company, medicineDto).Adapt<Medicine>(_configToMedicine.Config);
 
-            await _medicineRepository.Add(data);
+            return _medicineRepository.Add(data);
         }
 
-        public async Task Delete(int id)
+        public Task Delete(int id)
         {
-            Medicine result = await _medicineRepository.GetByMedicineId(id);
-            await _medicineRepository.Delete(result);
+            var result = _medicineRepository.GetByMedicineId(id);
+            return _medicineRepository.Delete(result.Result);
         }
 
         public async Task<List<MedicineDto>> GetAll()
@@ -66,13 +66,13 @@ namespace Pharmacy.Application.MedicineApp
 
         }
 
-        public async Task Update(MedicineDto medicineDto)
+        public Task Update(MedicineDto medicineDto)
         {
-            var result = await _companyRepository.Get(c => c.CompanyName == medicineDto.CompanyName);
-            Company company = result.ElementAt(0);
+            var result = _companyRepository.Get(c => c.CompanyName == medicineDto.CompanyName);
+            Company company = result.Result.ElementAt(0);
             Medicine data = (company, medicineDto).Adapt<Medicine>(_configToMedicine.Config);
 
-            await _medicineRepository.Update(data);
+            return _medicineRepository.Update(data);
         }
     }
 }
