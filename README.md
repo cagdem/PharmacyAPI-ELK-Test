@@ -3,9 +3,12 @@ Hepsiburada Backend Bootcamp 2.Hafta Ödevi
 
 Temel CRUD işlemleri ile ilaç kaydı yapılabilen bir resful Web-API projesi. Swagger desteği eklenmiştir. Database olarak EntityFramework ile oluşturulmuş bir database kullanılmıştır. Sort ve list özellikleri için `System.Linq.Dynamic.Core` paketinin sorgularda string kullanabilme işlevi kullanılarak extension oluşturulmuştur. Dto mappinglerinde mapster kullanılmıştır. Serilog ile konsola, `.txt` ve `.json` uzantılı dosyalara loglama yapmaktadır.
 
-Log ssini ekle
+![Konsol log örneği](https://user-images.githubusercontent.com/15106912/135689741-e7b4639b-1295-49ed-8a13-23f390f13d27.png)
 
-end point ssini ekle
+
+
+![Swagger](https://user-images.githubusercontent.com/15106912/135689762-c57766bc-357f-4323-9e6c-a5148dcf68da.png)
+
 
 ## /api/v1/firmalar
 Get ile kullanıldığında bütün firmaları getirir.
@@ -36,7 +39,7 @@ Get ile kullanıldığında istenilen alanda istenilen değer sorgulanabilir. Ö
 ## /api/v1/ilaclar/Sort?sort={FieldAdi}
 Get ile kullanıldığında verilen alana göre sıralanır. Örneğin `/api/v1/ilaclar/Sort?sort=name` yapıldığında bütün veriler isme göre alfabetik sıralanır.
 
-#### To-Do
+### To-Do
 - Http dönüş kodları düzenlenmeli. Dönüşlerin detaylandırılabilmesi için özel bir result nesnesi düzenlenebilir.
 - Order ve OrderDetail nesneleri için servis ve controller yazılmalı.
 
