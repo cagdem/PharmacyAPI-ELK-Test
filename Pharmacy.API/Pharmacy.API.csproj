@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pharmacy.Application\Pharmacy.Application.csproj" />
-    <ProjectReference Include="..\Pharmacy.Infrastructure\Pharmacy.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

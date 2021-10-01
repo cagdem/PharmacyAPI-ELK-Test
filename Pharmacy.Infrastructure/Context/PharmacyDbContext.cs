@@ -23,7 +23,7 @@ namespace Pharmacy.Infrastructure.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Medicine>().Property(m => m.UnitPrice)
-                .HasColumnType("money"); 
+                .HasColumnType("money");
 
             modelBuilder.Entity<OrderDetail>().Property(o => o.UnitPrice)
                 .HasColumnType("money");

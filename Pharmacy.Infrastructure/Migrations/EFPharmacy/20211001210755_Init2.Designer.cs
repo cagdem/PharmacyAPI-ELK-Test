@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pharmacy.Infrastructure.Context;
 
 namespace Pharmacy.Infrastructure.Migrations.EFPharmacy
 {
     [DbContext(typeof(PharmacyDbContext))]
-    partial class EFPharmacyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211001210755_Init2")]
+    partial class Init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,7 +109,7 @@ namespace Pharmacy.Infrastructure.Migrations.EFPharmacy
 
             modelBuilder.Entity("Pharmacy.Domain.Entities.OrderDetail", b =>
                 {
-                    b.Property<int>("OrderId")
+                    b.Property<int>("OrderDetailId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -115,7 +117,7 @@ namespace Pharmacy.Infrastructure.Migrations.EFPharmacy
                     b.Property<int>("MedicineId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderId1")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -124,9 +126,11 @@ namespace Pharmacy.Infrastructure.Migrations.EFPharmacy
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("money");
 
-                    b.HasKey("OrderId");
+                    b.HasKey("OrderDetailId");
 
-                    b.HasIndex("OrderId1");
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -155,9 +159,19 @@ namespace Pharmacy.Infrastructure.Migrations.EFPharmacy
 
             modelBuilder.Entity("Pharmacy.Domain.Entities.OrderDetail", b =>
                 {
+                    b.HasOne("Pharmacy.Domain.Entities.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Pharmacy.Domain.Entities.Order", "Order")
                         .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId1");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Medicine");
 
                     b.Navigation("Order");
                 });

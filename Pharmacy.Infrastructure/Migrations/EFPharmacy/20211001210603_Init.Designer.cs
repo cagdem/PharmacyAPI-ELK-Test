@@ -10,7 +10,7 @@ using Pharmacy.Infrastructure.Context;
 namespace Pharmacy.Infrastructure.Migrations.EFPharmacy
 {
     [DbContext(typeof(PharmacyDbContext))]
-    [Migration("20210928153129_Init")]
+    [Migration("20211001210603_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,7 +109,7 @@ namespace Pharmacy.Infrastructure.Migrations.EFPharmacy
 
             modelBuilder.Entity("Pharmacy.Domain.Entities.OrderDetail", b =>
                 {
-                    b.Property<int>("OrderId")
+                    b.Property<int>("OrderDetailId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -117,20 +117,22 @@ namespace Pharmacy.Infrastructure.Migrations.EFPharmacy
                     b.Property<int>("MedicineId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderId1")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<decimal>("UnitPrice")
-                        .HasColumnType("money");
+                        .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("OrderId");
+                    b.HasKey("OrderDetailId");
 
-                    b.HasIndex("OrderId1");
+                    b.HasIndex("MedicineId");
 
-                    b.ToTable("OrderDetails");
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetail");
                 });
 
             modelBuilder.Entity("Pharmacy.Domain.Entities.Medicine", b =>
@@ -157,9 +159,19 @@ namespace Pharmacy.Infrastructure.Migrations.EFPharmacy
 
             modelBuilder.Entity("Pharmacy.Domain.Entities.OrderDetail", b =>
                 {
+                    b.HasOne("Pharmacy.Domain.Entities.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Pharmacy.Domain.Entities.Order", "Order")
                         .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId1");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Medicine");
 
                     b.Navigation("Order");
                 });

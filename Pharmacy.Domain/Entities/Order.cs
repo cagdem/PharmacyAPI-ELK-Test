@@ -16,6 +16,7 @@ namespace Pharmacy.Domain.Entities
         [Required]
         public DateTime OrderDate { get; set; }
 
+
         public ICollection<OrderDetail> OrderDetails { get; set; }
         [ForeignKey("CustomerId")]
         public Customer Customer { get; set; }
