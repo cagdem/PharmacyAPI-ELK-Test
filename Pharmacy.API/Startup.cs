@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Serilog;
 
 
 namespace PharmacyAPI
@@ -48,6 +49,7 @@ namespace PharmacyAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PharmacyAPI v1"));
             }
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 
