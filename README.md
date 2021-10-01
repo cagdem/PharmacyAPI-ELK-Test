@@ -3,9 +3,15 @@ Hepsiburada Backend Bootcamp 2.Hafta Ödevi
 
 Temel CRUD işlemleri ile ilaç kaydı yapılabilen bir resful Web-API projesi. Swagger desteği eklenmiştir. Database olarak EntityFramework ile oluşturulmuş bir database kullanılmıştır. Sort ve list özellikleri için `System.Linq.Dynamic.Core` paketinin sorgularda string kullanabilme işlevi kullanılarak extension oluşturulmuştur. Dto mappinglerinde mapster kullanılmıştır. Serilog ile konsola, `.txt` ve `.json` uzantılı dosyalara loglama yapmaktadır.
 
+Database view:
+
+![image](https://user-images.githubusercontent.com/15106912/135694964-82a077bc-bde8-4c0e-adf2-8a86a348ab0c.png)
+
+Konsol log örneği:
+
 ![Konsol log örneği](https://user-images.githubusercontent.com/15106912/135689741-e7b4639b-1295-49ed-8a13-23f390f13d27.png)
 
-
+Swagger:
 
 ![Swagger](https://user-images.githubusercontent.com/15106912/135689762-c57766bc-357f-4323-9e6c-a5148dcf68da.png)
 
