@@ -1,7 +1,7 @@
 # HomeWork2-CaglarDemir
 Hepsiburada Backend Bootcamp 2.Hafta Ödevi
 
-Temel CRUD işlemleri ile ilaç kaydı yapılabilen bir resful Web-API projesi. Swagger desteği eklenmiştir. Database olarak EntityFramework ile oluşturulmuş bir database kullanılmıştır. Sort ve list özellikleri için `System.Linq.Dynamic.Core` paketinin sorgularda string kullanabilme işlevi kullanılarak extension oluşturulmuştur. Dto mappinglerinde mapster kullanılmıştır. Serilog ile konsola, `.txt` ve `.json` uzantılı dosyalara loglama yapmaktadır.
+Temel CRUD işlemleri ile ilaç kaydı yapılabilen bir resful Web-API projesi. **Swagger** desteği eklenmiştir. Database olarak EntityFramework ile oluşturulmuş bir database kullanılmıştır. Company nesnesi için hem **EntityFramework** hem **Dapper** repositorysi yazılmıştır. Sort ve list özellikleri için `System.Linq.Dynamic.Core` paketinin sorgularda `string` kullanabilme işlevi kullanılarak extension oluşturulmuştur. Dto mappinglerinde **Mapster** kullanılmıştır. **Serilog** ile konsola, `.txt` ve `.json` uzantılı dosyalara loglama yapmaktadır.
 
 Database view:
 
@@ -22,21 +22,21 @@ Get ile kullanıldığında bütün firmaları getirir.
 Post ile kullanıldığında body içerisindeki firmayı ekler.
 
 ## /api/v1/firmalar/{id}
-Get ile kullanıldığında routerdan gelen id'ye sahip firmayı getirir.
+Get ile kullanıldığında routerdan gelen `id`'ye sahip firmayı getirir.
 
-Delete ile kullanıldığında routerdan gelen id'ye sahip firma silinir.
+Delete ile kullanıldığında routerdan gelen `id`'ye sahip firma silinir.
 
-Put ile kullanıldığında routerdan gelen id'ye sahip firmayı güncellemek için body içerisindeki firmayı kullanır.
+Put ile kullanıldığında routerdan gelen `id`'ye sahip firmayı güncellemek için body içerisindeki firmayı kullanır.
 
 
 ## /api/v1/ilaclar
 Post ile body içerisinde gönderilen ilacı ekler.
 ## /api/v1/ilaclar/{id}
-Get ile kullanıldığında routerdan gelen id'ye sahip ilacı getirir.
+Get ile kullanıldığında routerdan gelen `id`'ye sahip ilacı getirir.
 
-Put ile kullanıldığında routerdan gelen id'ye sahip ilacı güncellemek için body içerisindeki ilacı kullanır.
+Put ile kullanıldığında routerdan gelen `id`'ye sahip ilacı güncellemek için body içerisindeki ilacı kullanır.
 
-Delete ile kullanıldığında routerdan gelen id'ye sahip ilac silinir.
+Delete ile kullanıldığında routerdan gelen `id`'ye sahip ilac silinir.
 ## /api/v1/ilaclar/List
 Get ile kullanıldığında bütün ilaçları databasedeki sıralamaya göre listeler.
 ## /api/v1/ilaclar/List?list={FieldAdi}="{FieldDeğeri}"
