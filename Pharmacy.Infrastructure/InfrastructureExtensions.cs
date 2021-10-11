@@ -19,14 +19,25 @@ namespace Pharmacy.Infrastructure
     {
         public static IServiceCollection AddInfrastructureModule(this IServiceCollection services,IConfiguration configuration)
         {
+            services.AddScoped<IMedicineRepository, EFMedicineRepository>();
+            services.AddScoped<ICompanyRepository, EFCompanyRepository>();
+            //services.AddScoped<ICompanyRepository, DapperCompanyRepository>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddInfrastructureModuleDb(this IServiceCollection services, IConfiguration configuration)
+        {
             services.AddDbContext<PharmacyDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")
-                ,b =>b.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName))); // migration sırasında problem çıkmaması için derste eklenmişti.
+                , b => b.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName))); // migration sırasında problem çıkmaması için derste eklenmişti.
 
-            services.AddScoped<IMedicineRepository, EFMedicineRepository>();
-            //services.AddScoped<ICompanyRepository, EFCompanyRepository>();
-            services.AddScoped<ICompanyRepository, DapperCompanyRepository>();
+            return services;
+        }
 
+        public static IServiceCollection AddInfrastructureModuleDbTest(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<PharmacyDbContext>(options => options.UseInMemoryDatabase("PharmacyTestDb"));
             return services;
         }
     }

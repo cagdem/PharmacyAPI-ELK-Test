@@ -34,7 +34,7 @@ namespace Pharmacy.Application.CompanyApp
 
         public async Task<List<CompanyDto>> GetAll()
         {
-            var result = await _companyRepository.GetAll();
+            var result = (await _companyRepository.GetAll()).OrderBy(x=>x.CompanyId);
             return result.Adapt<List<CompanyDto>>();
         }
 

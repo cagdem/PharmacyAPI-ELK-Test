@@ -26,6 +26,7 @@ namespace Pharmacy.Application.MedicineApp
         [ExpirationdateValidation] 
         public DateTime ExpirationDate { get; set; }
         public string Details { get; set; }
+        public int CompanyId { get; set; }
 
     }
 }

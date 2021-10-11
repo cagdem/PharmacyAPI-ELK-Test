@@ -30,13 +30,17 @@ namespace Pharmacy.Application.MedicineApp
             _companyRepository = companyRepository;
         }
 
-        public Task Add(MedicineDto medicineDto)
+        public async Task Add(MedicineDto medicineDto)
         {
+            var current =(await _medicineRepository.Get(x => x.Name.Trim() == medicineDto.Name.Trim())).FirstOrDefault();
+
+            if (current != null) throw new ApplicationException("Ayni adda kayit var");
+
             var result = _companyRepository.Get(c => c.CompanyName == medicineDto.CompanyName);
             Company company = result.Result.ElementAt(0);
             Medicine data = (company, medicineDto).Adapt<Medicine>(_configToMedicine.Config);
 
-            return _medicineRepository.Add(data);
+            await _medicineRepository.Add(data);
         }
 
         public Task Delete(int id)
@@ -49,6 +53,7 @@ namespace Pharmacy.Application.MedicineApp
         {
             List<MedicineDto> data = new List<MedicineDto>();
             var result = await _medicineRepository.GetWithCompany(a => true);
+            result = result.OrderBy(x => x.MedicineId).ToList();
             foreach (var item in result)
             {
                 data.Add((item.Company, item).Adapt<MedicineDto>(_configToMedicineDto.Config));

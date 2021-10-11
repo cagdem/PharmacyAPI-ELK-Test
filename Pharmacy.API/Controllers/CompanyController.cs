@@ -34,9 +34,11 @@ namespace Pharmacy.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] CompanyDto companyDto)
+        public async Task<IActionResult> Add([FromBody] CompanyDto companyDto)
         {
-            _companyService.Add(companyDto);
+            if (!ModelState.IsValid) return BadRequest();
+            await _companyService.Add(companyDto);
+            
             return Ok(new { status = true, errors = "" });
         }
 
